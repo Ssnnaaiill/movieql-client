@@ -11,14 +11,13 @@ const Card = styled.div`
   background-position: center center;
   height: 300px;
   width: 200px;
-  margin: 40px;
+  margin-bottom: 40px;
   position: relative;
 `;
 
 const Title = styled.span`
   background-color: white;
   width: auto;
-  color: black;
   padding: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   position: absolute;
@@ -32,7 +31,7 @@ const Movie = ({ id, title, rating, poster }) => (
   <Link to={`/details/${id}`}>
     <Card background={poster}>
       <Title>
-        {title} ⭐️{rating}
+        {title} / {rating}⭐️
       </Title>
     </Card>
   </Link>

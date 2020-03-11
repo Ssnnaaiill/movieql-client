@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { Query } from "react-apollo";
+import { Helmet } from "react-helmet";
 import { HOME_PAGE } from "./queries";
 import Movie from "./Movie";
+import { useQuery } from "react-apollo-hooks";
 
 const Container = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 0.7fr);
   flex-wrap: wrap;
-  justify-content: center;
+  justify-items: center;
 `;
 
 /**
@@ -16,13 +18,19 @@ const Container = styled.div`
  * This is called a render prop.
  */
 
-const Home = () => (
-  <Container>
-    <Query query={HOME_PAGE}>
-      {({ loading, data, error }) => {
-        if (loading) return "Loading...";
-        if (error) return "Something Happened!";
-        return data.movies.map(movie => (
+const Home = () => {
+  const { data, error, loading } = useQuery(HOME_PAGE);
+  return (
+    <Container>
+      <Helmet>
+        <title>Home | MovieQL</title>
+      </Helmet>
+      {loading && "Loading"}
+      {error && "Something is wrong"}
+      {!loading &&
+        data &&
+        data.movies &&
+        data.movies.map(movie => (
           <Movie
             id={movie.id}
             key={movie.id}
@@ -30,10 +38,9 @@ const Home = () => (
             title={movie.title}
             rating={movie.rating}
           />
-        ));
-      }}
-    </Query>
-  </Container>
-)
+        ))}
+    </Container>
+  );
+};
 
 export default Home;
