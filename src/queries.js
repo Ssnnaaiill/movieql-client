@@ -13,6 +13,7 @@ export const HOME_PAGE = gql`
       title
       genres
       rating
+      medium_cover_image
     }
   }
 `;
