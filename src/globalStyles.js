@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
   
   body {
     font-family: "Do Hyeon";
+    color: white;
     background-color: #333;
   }
     
